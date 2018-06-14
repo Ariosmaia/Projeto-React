@@ -3,6 +3,7 @@ import './css/pure-min.css';
 import './css/side-menu.css';
 import $ from 'jquery';
 import InputCustomizado from './componentes/InputCustomizado';
+import BotaoSubmitCustomizado from './componentes/BotaoSubmitCustomizado';
 
 class App extends Component {
 
@@ -10,9 +11,9 @@ class App extends Component {
     super();    
     this.state = {lista : [],nome:'', email:'', senha:''};
     this.enviaForm = this.enviaForm.bind(this);
-    this.SetNome = this.SetNome.bind(this);
-    this.SetEmail = this.SetEmail.bind(this);
-    this.SetSenha = this.SetSenha.bind(this);
+    this.setNome = this.setNome.bind(this);
+    this.setEmail = this.setEmail.bind(this);
+    this.setSenha = this.setSenha.bind(this);
   }
 
   componentDidMount(){
@@ -28,7 +29,6 @@ class App extends Component {
 
   enviaForm(evento){
     evento.preventDefault();
-    console.log("Dados sendo enviados")
     $.ajax({
       url:"https://cdc-react.herokuapp.com/api/autores",
       contentType: 'application/json',
@@ -44,13 +44,13 @@ class App extends Component {
     })
   }
 
-  SetNome(evento){
+  setNome(evento){
     this.setState({nome:evento.target.value});
   }
-  SetEmail(evento){
+  setEmail(evento){
     this.setState({email:evento.target.value});
   }   
-  SetSenha(evento){
+  setSenha(evento){
     this.setState({senha:evento.target.value});
   }       
  
@@ -86,13 +86,12 @@ class App extends Component {
                 <form className="pure-form pure-form-aligned" onSubmit= {this.enviaForm} method="post">
 
                   <InputCustomizado id="nome" type="text" name="nome" value={this.state.nome} onChange={this.setNome} label="Nome"/>
-                  <InputCustomizado id="email" type="email" name="email" value={this.state.email} onChange={this.SetEmail} label="Email"/>
-                  <InputCustomizado id="senha" type="password" name="senha" value={this.state.senha} onChange={this.SetSenha} label="Senha"/>                  
-                  <label></label>
-                  <div className="pure-control-group">                                  
-                    <label></label> 
-                    <button type="submit" className="pure-button pure-button-primary">Gravar</button>                                    
-                  </div>
+                  <InputCustomizado id="email" type="email" name="email" value={this.state.email} onChange={this.setEmail} label="Email"/>
+                  <InputCustomizado id="senha" type="password" name="senha" value={this.state.senha} onChange={this.setSenha} label="Senha"/>
+                  
+
+                  <BotaoSubmitCustomizado label="Gravar"/>
+
                 </form>             
 
               </div>  
